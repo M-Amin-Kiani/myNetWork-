@@ -1,0 +1,26 @@
+package clientapp;
+
+import java.net.*;
+import java.io.*;
+import java.nio.ByteBuffer;
+
+public class ClientApp {
+
+    public static void main(String[] args) throws IOException {
+        //-----------
+        String message = "Hello Server";
+        byte[] buffer = message.getBytes();
+        //-----------
+        //ByteBuffer bb = ByteBuffer.allocate(4);
+        //bb.putInt(1234);
+        //byte[] buffer = bb.array();
+        //-----------
+        SocketAddress serverIP = new InetSocketAddress("127.0.0.1", 7777);
+        DatagramPacket dataGram = new DatagramPacket(buffer, buffer.length, serverIP);
+        //-----------
+        DatagramSocket socket_UDP = new DatagramSocket();
+        socket_UDP.send(dataGram);
+        System.out.println("Message sent to the server.");
+        //-----------
+    }
+}

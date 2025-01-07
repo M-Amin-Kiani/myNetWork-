@@ -1,0 +1,26 @@
+package serverapp;
+
+import java.net.*;
+import java.io.*;
+
+public class ServerApp {
+
+    public static void main(String[] args) throws IOException {
+        
+        DatagramSocket socket_UDP = new DatagramSocket(7777);
+        byte[] buffer = new byte[1000];
+        //------------
+        DatagramPacket dataGram = new DatagramPacket(buffer, buffer.length);
+        System.out.println("Waiting for a new message...");
+        socket_UDP.receive(dataGram);
+        //------------
+        ByteArrayInputStream bin = new ByteArrayInputStream(dataGram.getData());
+        DataInputStream dataIn = new DataInputStream(bin);
+        //------------
+        System.out.println(dataIn.readLine());
+        //------------
+        //System.out.println(dataIn.readInt());
+        //------------
+        socket_UDP.close();
+    }
+}

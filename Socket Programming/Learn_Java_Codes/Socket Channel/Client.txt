@@ -1,0 +1,28 @@
+package clientapp;
+
+import java.net.*;
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.*;
+
+public class ClientApp {
+
+    public static void main(String[] args) throws IOException {
+
+        SocketAddress serverIP = new InetSocketAddress("127.0.0.1", 6666);
+        SocketChannel socketChannel = SocketChannel.open(serverIP);
+        System.out.println("Client connected to the server...");
+        //-----------
+        String message = "Hello Server";
+        ByteBuffer bb = ByteBuffer.wrap(message.getBytes());
+        //-----------
+        //ByteBuffer bb = ByteBuffer.allocate(4); 
+        //bb.putInt(1234);
+        //bb.flip();
+        //--------------
+        while (bb.hasRemaining()) {
+            socketChannel.write(bb);
+        }
+
+    }
+}

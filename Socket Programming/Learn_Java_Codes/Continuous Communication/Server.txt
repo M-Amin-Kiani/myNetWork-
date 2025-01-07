@@ -1,0 +1,33 @@
+package serverapp;
+
+import java.net.*;
+import java.io.*;
+
+public class ServerApp {
+
+    public static void main(String[] args) throws IOException {
+
+        System.out.println("Waiting for a client...");
+        ServerSocket serverSocket = new ServerSocket(6666);
+        Socket clientSocket = serverSocket.accept();
+        System.out.println("Server accepted a new client...");
+        //---------------
+        InputStreamReader reader = new InputStreamReader(clientSocket.getInputStream());
+        BufferedReader in = new BufferedReader(reader);
+        String message = in.readLine();
+        System.out.println(message);
+        //---------------
+        while ((message = in.readLine()) != null) {
+            if (message.equals("END")) {
+                System.out.println("Good bye");
+                break;
+            }
+            else
+                System.out.println("Message: " + message);
+        }
+        //---------------
+        in.close();
+        clientSocket.close();
+        serverSocket.close();
+    }
+}

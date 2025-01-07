@@ -1,0 +1,33 @@
+package serverapp;
+
+import java.net.*;
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.*;
+
+public class ServerApp {
+
+    public static void main(String[] args) throws IOException {
+        
+        ServerSocketChannel serverChannel = ServerSocketChannel.open();
+        serverChannel.bind(new InetSocketAddress(6666));
+        //------------
+        System.out.println("Waiting for a client...");
+        SocketChannel clientChannel = serverChannel.accept();
+        System.out.println("Server accepted a new client...");
+        //------------
+        ByteBuffer bb = ByteBuffer.allocate(100);
+        int bytesRead = clientChannel.read(bb);
+        String newContent = new String(bb.array(), "UTF8");
+        System.out.println(newContent);
+        //------------
+        //ByteBuffer bb = ByteBuffer.allocate(4);
+        //int bytesRead = clientChannel.read(bb);
+        //bb.flip();
+        //int value = bb.getInt();
+        //System.out.println(value);
+        //------------
+        clientChannel.close();
+        serverChannel.close();
+    }
+}

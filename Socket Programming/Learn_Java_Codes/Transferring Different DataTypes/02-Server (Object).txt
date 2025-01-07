@@ -1,0 +1,43 @@
+package serverapp;
+
+import java.net.*;
+import java.io.*;
+
+public class ServerApp {
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+
+        System.out.println("Waiting for a client...");
+        ServerSocket serverSocket = new ServerSocket(6666);
+        Socket clientSocket = serverSocket.accept();
+        System.out.println("Server accepted a new client...");
+        //---------------
+        ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(clientSocket.getInputStream()));
+        String message = (String)in.readUTF();
+        System.out.println(message);
+        System.out.println(in.readInt());
+        //---------------       
+        Student std = (Student)in.readObject();
+        System.out.println("ID: " + std.ID);
+        System.out.println("Name: " + std.Name);
+        System.out.println("GPA: " + std.GPA);
+        //---------------
+        in.close();
+        clientSocket.close();
+        serverSocket.close();
+    }
+}
+
+class Student implements Serializable
+{
+    public int ID;
+    public String Name;
+    public double GPA;
+    
+    public Student(int ID, String Name, double GPA)
+    {
+        this.ID = ID;
+        this.Name = Name;
+        this.GPA = GPA;
+    }
+}

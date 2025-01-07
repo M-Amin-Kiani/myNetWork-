@@ -1,0 +1,27 @@
+package clientapp;
+
+import java.net.*;
+import java.io.*;
+
+public class ClientApp {
+
+    public static void main(String[] args) throws IOException {
+        
+        Socket clientSocket = new Socket("127.0.0.1", 6666);
+        System.out.println("Client connected to the server...");
+        //---------------
+        PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+        //---------------
+        InputStreamReader reader = new InputStreamReader(clientSocket.getInputStream());
+        BufferedReader in = new BufferedReader(reader);
+        //---------------
+        out.println("Hello Server (from client)");
+        //---------------
+        String message = in.readLine();
+        System.out.println(message);
+        //---------------
+        in.close();
+        out.close();
+        clientSocket.close();
+    }
+}

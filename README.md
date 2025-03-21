@@ -9,12 +9,15 @@
 
 1. **Echo Tunnel Base**  
    ارتباط بین دو سیستم در سطح IP بدون دخالت فایروال.
+  to use Echo Tunnel Base ==> turn off all firewalls from 2 system && pair them with (Rj45 Cable) or (VMware) or (Hotspot) or (WIFI) to set up a local network in IP layer (L3 - TCP/IP)
 
 2. **Endpoint Management Tools**  
    ابزارهایی برای مدیریت نقاط انتهایی و اتصال در لایه شبکه.
-
-3. **Socket Programming**  
+  to use Endpoint Management Tools ==> turn off all firewalls from 2 system && pair them with (Rj45 Cable) or (VMware) or (Hotspot) or (WIFI) to set up a local network in IP layer (L3 - TCP/IP)
+   
+4. **Socket Programming**  
    مثال‌هایی ساده و آموزشی از برنامه‌نویسی سوکت با زبان جاوا.
+  Socket Programming just to learn their basics in Java
 
 ---
 
